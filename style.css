@@ -1,0 +1,269 @@
+//use scss processor
+$colorText: #353a3f; 
+$textTitle: 'Audiowide', cursive;
+$text: 'Armata', sans-serif;
+
+$sunSky: radial-gradient(circle at top left, #f7f7a5, #00c6f7 80%);
+$greySky: radial-gradient(circle at top left, #eef2f3, #8e9eab 80%);
+$darkSky: radial-gradient(#243B55 0%, #141E30 100%);
+$sunrize: radial-gradient(circle at bottom, #fc8a38 -10%, #fc8a38 5%, #ca1c29 10%,  #1197e8 60%, #073f61 110%);
+$sunrizaPale: radial-gradient(circle at bottom, rgba(252, 138, 56, 0.5) -10%, rgba(252, 138, 56, 0.5) 5%, rgba(202, 28, 41, 0.5) 10%, rgba(17, 151, 232, 0.5) 60%, rgba(7, 63, 97, 0.5) 110%);
+
+$oneCloud: url('https://res.cloudinary.com/colmsk/image/upload/v1550837353/clouds/cloud-2.png');
+$clouds: url('https://res.cloudinary.com/colmsk/image/upload/v1550837353/clouds/cloud-2.png'),
+				url('https://res.cloudinary.com/colmsk/image/upload/v1550837353/clouds/cloud-2.png'),
+				url('https://res.cloudinary.com/colmsk/image/upload/v1550837353/clouds/cloud-2.png'),
+				url('https://res.cloudinary.com/colmsk/image/upload/v1550837353/clouds/cloud-2.png'),
+			  url('https://res.cloudinary.com/colmsk/image/upload/v1550837353/clouds/cloud-2.png');
+$rain: url('https://res.cloudinary.com/colmsk/image/upload/v1551085720/rain-drop.png');
+$thunderstorm: url('https://res.cloudinary.com/colmsk/image/upload/v1551087746/clouds/thunderstorm.png');
+$snow: url('https://res.cloudinary.com/colmsk/image/upload/v1551094112/snow.png');
+$fog: url('https://res.cloudinary.com/colmsk/image/upload/v1551094422/fog.png');
+$stars: radial-gradient(white, rgba(255, 255, 255, 0.1) 3px, transparent 30px),
+				radial-gradient(white, rgba(255, 255, 255, 0.1) 2px, transparent 20px),
+				radial-gradient(white, rgba(255, 255, 255, 0.05) 1px, transparent 30px),
+				radial-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1) 2px, transparent 20px);
+
+@mixin firstPosition {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+html, body {
+  min-height: 100%;
+}
+body {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
+  background-size: cover;
+  color: $colorText;
+}
+h1 {
+	font: {
+		family: $textTitle;
+		size: 2.5em;
+    weight: 100;
+	}
+	text: {
+		align: center;
+		shadow: 1px 3px 4px hsla(0, 0%, 0%, 0.3);
+	}
+}
+main {
+	width: 80%;
+	display: grid;
+	grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr;
+	margin: 0 auto;
+	background-color: rgba(255, 255, 255, 0.3);
+	border-radius: 10px;
+	box-shadow: 1px 3px 4px hsla(0, 0%, 0%, 0.3);
+	overflow: hidden;
+}
+
+.window {
+	@include firstPosition;
+	
+	img {
+		width: 100%;
+		display: block;
+	}
+}
+.weather {
+	@include firstPosition;
+}
+.info {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	padding: 15px 0 0 15px;
+	font: {
+		family: $text;
+		size: 1.2em;
+    weight: 100;
+	}
+	
+	#switchTemp {
+		padding: 5px 10px;
+		font: {
+			family: $text;
+			size: 0.8em;
+			weight: 100;
+		}
+		background: transparent;
+    border: 1px solid rgba($colorText, 0.5);
+		border-radius: 5px;
+		
+		&:focus {
+			outline: none;
+		}
+	}
+	
+	div {
+		margin-bottom: 20px;
+	}
+	
+	span {
+		font: {
+			weight: 600;
+		}
+		
+	}
+}
+
+.day.clear {
+	background: {
+		image: $oneCloud,	
+					 $sunSky;
+	  repeat: no-repeat;
+		position: 70% 70%;
+	}
+}
+.day.cloud {
+	background: {
+		image: $clouds,
+					 $greySky;
+		repeat: no-repeat;
+		position: 0% 30%, 90% 10%, 100% 80%, 50% 50%, 20% 80%;
+	}
+}
+.day.rain {
+	background: {
+		image: $rain,
+					 $greySky;
+	}
+}
+.day.thunderstorm {
+		background: {
+		image: $rain,
+					 $thunderstorm;
+		repeat: repeat, no-repeat;
+	}
+}
+.day.snow {
+		background: {
+		image: $snow,
+					 $greySky;
+		repeat: repeat, no-repeat;
+	}
+}
+.day.fog {
+			background: {
+		image: $fog,
+					 $greySky;
+		repeat: no-repeat;
+		position: 50% 80%, 0% 0%;
+	}
+}
+
+
+.night.clear {
+	background: {
+		image: $stars,
+					 $darkSky;
+		size: 550px 550px, 350px 350px, 250px 250px, 150px 150px, 100% 100%;
+		position: 0 0, 40px 60px, 130px 270px, 70px 100px, 0 0;
+	}
+}
+.night.cloud {
+	background: {
+		image: $clouds,
+					 $darkSky;
+		repeat: no-repeat;
+		position: 0% 30%, 90% 10%, 100% 80%, 50% 50%, 20% 80% , 0% 0%;
+	}
+}
+.night.rain {
+	background: {
+		image: $rain,
+					 $darkSky;
+	}
+}
+.night.thunderstorm {
+		background: {
+		image: $rain,
+					 $thunderstorm,
+			     $darkSky;
+		repeat: repeat, no-repeat;
+	}
+}
+.night.snow {
+		background: {
+		image: $snow,
+					 $darkSky;
+		repeat: repeat, no-repeat;
+	}
+}
+.night.fog {
+			background: {
+		image: $fog,
+					 $darkSky;
+		repeat: no-repeat;
+		position: 50% 80%, 0% 0%;
+	}
+}
+
+
+.sunrise.clear {
+	background: {
+		image: $sunrize;
+	}
+}
+.sunrise.cloud {
+	background: {
+		image: $clouds,
+					 $sunrize;
+		repeat: no-repeat;
+		position: 0% 30%, 90% 10%, 100% 80%, 50% 50%, 20% 80% , 0% 0%;
+	}
+}
+.sunrise.rain {
+	background: {
+		image: $rain,
+					 $sunrizaPale;
+	}
+}
+.sunrise.thunderstorm {
+		background: {
+		image: $rain,
+					 $thunderstorm,
+			     $sunrizaPale;
+		repeat: repeat, no-repeat;
+	}
+}
+.sunrise.snow {
+		background: {
+		image: $snow,
+					 $sunrizaPale;
+		repeat: repeat, no-repeat;
+	}
+}
+.sunrise.fog {
+			background: {
+		image: $fog,
+					 $sunrizaPale;
+		repeat: no-repeat;
+		position: 50% 80%, 0% 0%;
+	}
+}
+
+
+@media (max-width: 941px) {
+	main {
+		grid-template-rows: auto auto;
+	}	
+	.window, .weather {
+		grid-column-start: 1;
+		grid-column-end: 3;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+	.info {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 2;
+		grid-row-end: 3;
+	}
+}
